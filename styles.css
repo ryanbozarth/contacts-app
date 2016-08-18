@@ -1,7 +1,30 @@
+* {
+	/* outline: solid 1px red; */
+	box-sizing: border-box;
+}
+
 .container {
 	margin-left: 10px;
 }
 
 form {
 	width: 50%;
+	display: inline-block;
+}
+
+.right-column {
+	width: 40%;
+	display: inline-block;
+	position: absolute;
+	margin-left: 5%;
+}
+
+.additionalPhone, .additionalAddress {
+	margin-left: 5px;
+	border: none;
+	border-radius: 3px;
+}
+
+.addPhone input {
+	width: 80%;
 }

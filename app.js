@@ -8,19 +8,17 @@ $(document).ready(function() {
         event.preventDefault();
         var firstName = $('#firstName').val();
         var lastName = $('#lastName').val();
-
         var phoneNumber = $('#phoneNumber').val();
         var street = $('#street').val();
         var city = $('#city').val();
         var state = $('#state').val();
+        
         var contact = {
             firstName: firstName,
             lastName: lastName,
             phoneNumber: [],
-            // address : [{street: "some street", city: "some city"}]
-            street: street,
-            city: city,
-            state: state
+            address: []
+          
         }
         var selectPhone = $('.addPhone input');
         var length = selectPhone.length;
@@ -29,6 +27,23 @@ $(document).ready(function() {
             // more code needed
             contact.phoneNumber.push(tempPhone)
         }
+        var selectAddress = $('.containAddress .addAddress');
+        for (var i = 0; i < selectAddress.length; i++){
+            var tempAddress = $(selectAddress[i])
+            var inputs = tempAddress.find('input');
+             var city = $(inputs[0]).val(); // one 
+             contact.address.push({
+                city: city
+             })
+            // filter() or find()
+        }
+        // this? $(this). parent(), wrap an extra div, 
+
+        // { 
+        //    cit     street: street, 
+        //         city: city, 
+        //         state: state
+        //     }
 
         // Index is used to identify location of contact in an array
         var index = contacts.push(contact) - 1;
@@ -36,17 +51,15 @@ $(document).ready(function() {
         $('#firstName').val("");
         $('#lastName').val("");
         $('#phoneNumber').val("");
-        $('#street').val("");
-        $('#city').val("");
-        $('#state').val("");
+        $('.street').val("");
+        $('.city').val("");
+        $('.state').val("");
 
         $("#addressBook").append("<li><a href='#aside' class='contactList' id= '" + index + "'>" + contact.firstName + " " + contact.lastName + "</li>");
     });
 
     $('body').on('click', '.contactList', function(event) {
         event.preventDefault();
-        console.log("hi");
-        console.log(contacts[this.id]);
         $('.first-and-last-name-card').text(contacts[this.id].firstName + " " + contacts[this.id].lastName);
         $('.first-name-card').text(contacts[this.id].firstName);
         $('.last-name-card').text(contacts[this.id].lastName);
@@ -62,20 +75,18 @@ $(document).ready(function() {
 
     $('body').on('click', '.removePhone', function(event) {
         event.preventDefault();
-        // hints: this
         $(this).parent().remove();
-        console.log($(this).text());
         // $('.addPhone input:first').siblings().remove();
         // $('.addPhone').append('<br>');
     });
-    // Hints
-    // better ways
-    // .clone() jquery
+    $('.additionalAddress').on('click', function(event) {
+        event.preventDefault();
+        $('.addAddress').first().clone().appendTo('.containAddress');
+        // clones 2, 3 at a time cause it's cloning all of it
+        // how to add remove button to each set - append?
+    });
 
-    // $('.additionalAddress').on('click', function(event) {
-    //     event.preventDefault();
-    //     $('.addAddress').append('<input type="tel" class="form-control"><br>');
-    // });
+
 
 
 
